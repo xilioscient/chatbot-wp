@@ -1,0 +1,67 @@
+﻿/* Stile mobile-first per widget chat */
+.xilio-widget {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: 320px;
+  max-width: calc(100% - 32px);
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  z-index: 99999;
+}
+.xilio-header {
+  padding: 12px;
+  background: linear-gradient(90deg,#0f172a,#0b3a66);
+  color: #fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.xilio-messages {
+  padding: 12px;
+  height: 280px;
+  overflow-y: auto;
+  background: #f7fafc;
+}
+.xilio-input {
+  display:flex;
+  gap:8px;
+  padding: 10px;
+  border-top: 1px solid #eee;
+}
+.xilio-input textarea {
+  flex:1;
+  min-height:44px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  padding:8px;
+  resize:vertical;
+}
+.xilio-input .button {
+  background:#0b74de;
+  color:#fff;
+  border:none;
+  padding:8px 12px;
+  border-radius:8px;
+}
+.xilio-msg {
+  margin-bottom:10px;
+  display:flex;
+}
+.xilio-msg.user { justify-content:flex-end; }
+.xilio-msg .bubble {
+  max-width:80%;
+  padding:10px;
+  border-radius:10px;
+  background:#e6f0ff;
+}
+.xilio-msg.bot .bubble { background:#fff; border:1px solid #e6e6e6; }
+.xilio-typing { font-style:italic; color:#666; }
+@media (max-width:480px) {
+  .xilio-widget { width: 92%; right:4%; bottom:12px; }
+}

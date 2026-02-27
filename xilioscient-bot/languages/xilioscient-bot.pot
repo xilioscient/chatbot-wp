@@ -1,0 +1,6 @@
+﻿# POT file placeholder for internationalization
+msgid ""
+msgstr ""
+"Project-Id-Version: XilioScient Bot 0.1.0\n"
+"Language: it\n"
+"Content-Type: text/plain; charset=UTF-8\n"

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Anteprima Widget Chatbot</title>
+    <style>
+        /* Stili per simulare l'ambiente del widget */
+        body { font-family: sans-serif; background: #eee; height: 100vh; margin: 0; }
+        
+        #xilio-chat-widget {
+            position: fixed; bottom: 20px; right: 20px; width: 350px; height: 500px;
+            background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex; flex-direction: column; overflow: hidden; border: 1px solid #ccc;
+        }
+        #xilio-messages { flex: 1; padding: 15px; overflow-y: auto; background: #fafafa; }
+        .xilio-msg { margin-bottom: 10px; display: flex; }
+        .bubble { padding: 10px; border-radius: 8px; max-width: 80%; }
+        .xilio-msg.bot .bubble { background: #e0e0e0; align-self: flex-start; }
+        .xilio-msg.user .bubble { background: #007bff; color: white; align-self: flex-end; }
+        
+        .input-area { padding: 10px; border-top: 1px solid #ddd; display: flex; }
+        #xilio-input { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        #xilio-send { margin-left: 5px; padding: 8px 15px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        
+        #xilio-toggle { position: fixed; bottom: 20px; right: 20px; padding: 15px; background: #333; color: white; border-radius: 50%; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div id="xilio-toggle">Chat</div>
+
+    <div id="xilio-chat-widget" style="display:none;">
+        <div id="xilio-messages"></div>
+        <div class="input-area">
+            <input type="text" id="xilio-input" placeholder="Scrivi un messaggio...">
+            <button id="xilio-send">Invia</button>
+        </div>
+    </div>
+
+    <script>
+        // Mock per testare l'interfaccia senza backend WP
+        window.XILIO_CONFIG = { rest_url: '#', nonce: 'test' };
+
+        // Il tuo codice JavaScript (inserito qui)
+        (function(){
+          const restUrl = (typeof XILIO_CONFIG !== 'undefined') ? XILIO_CONFIG.rest_url : '/wp-json/mlc/v1/message';
+          const nonce = (typeof XILIO_CONFIG !== 'undefined') ? XILIO_CONFIG.nonce : '';
+
+          function $(id){ return document.getElementById(id); }
+
+          function createMessageElement(text, cls){
+            const div = document.createElement('div');
+            div.className = 'xilio-msg ' + cls;
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            bubble.textContent = text;
+            div.appendChild(bubble);
+            return div;
+          }
+
+          function appendBotMessage(text){
+            const container = $('xilio-messages');
+            const el = createMessageElement(text, 'bot');
+            container.appendChild(el);
+            container.scrollTop = container.scrollHeight;
+          }
+
+          function appendUserMessage(text){
+            const container = $('xilio-messages');
+            const el = createMessageElement(text, 'user');
+            container.appendChild(el);
+            container.scrollTop = container.scrollHeight;
+          }
+
+          function showTyping(){
+            const container = $('xilio-messages');
+            const el = document.createElement('div');
+            el.className = 'xilio-typing';
+            el.id = 'xilio-typing';
+            el.style.fontStyle = 'italic';
+            el.style.fontSize = '12px';
+            el.textContent = 'Xilio sta scrivendo...';
+            container.appendChild(el);
+            container.scrollTop = container.scrollHeight;
+          }
+          function hideTyping(){
+            const el = $('xilio-typing');
+            if (el) el.remove();
+          }
+
+          function getSessionId(){
+            let sid = localStorage.getItem('xilio_session_id');
+            if (!sid){
+              sid = 'sess-' + Math.random().toString(36).substr(2,9);
+              localStorage.setItem('xilio_session_id', sid);
+            }
+            return sid;
+          }
+
+          function sendMessage(message){
+            showTyping();
+            // Simula un ritardo di rete per vedere l'effetto di typing
+            setTimeout(() => {
+                hideTyping();
+                appendBotMessage('Messaggio ricevuto: ' + message + ' (Backend non connesso)');
+            }, 1000);
+          }
+
+          document.addEventListener('DOMContentLoaded', function(){
+            const sendBtn = $('xilio-send');
+            const input = $('xilio-input');
+            const toggle = $('xilio-toggle');
+            const widget = $('xilio-chat-widget');
+
+            sendBtn.addEventListener('click', function(){
+              const text = input.value.trim();
+              if (!text) return;
+              appendUserMessage(text);
+              input.value = '';
+              sendMessage(text);
+            });
+
+            input.addEventListener('keydown', function(e){
+              if (e.key === 'Enter' && !e.shiftKey){
+                e.preventDefault();
+                sendBtn.click();
+              }
+            });
+
+            toggle.addEventListener('click', function(){
+              widget.style.display = (widget.style.display === 'none') ? 'flex' : 'none';
+            });
+          });
+        })();
+    </script>
+</body>
+</html>

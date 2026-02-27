@@ -1,0 +1,17 @@
+﻿version: "3.8"
+services:
+  llm-service:
+    build: ./llm-service
+    container_name: xilio-llm
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./llm-service/data:/data
+      - ./llm-service/models:/models
+    environment:
+      - MODEL_PATH=/models/model.bin
+      - VECTOR_DB_PATH=/data
+      - JWT_SECRET=YOUR_JWT_SECRET_HERE
+      - MAX_CONTEXT_TOKENS=2048
+      - FALLBACK_API_URL=
+      - FALLBACK_API_KEY=
