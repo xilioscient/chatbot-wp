@@ -1,0 +1,32 @@
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+pydantic==2.5.3
+python-jose[cryptography]==3.3.0
+python-multipart==0.0.6
+PyJWT==2.8.0
+
+# Embeddings (NON llama-cpp-python, viene installato nel Dockerfile)
+sentence-transformers==2.3.1
+
+# Vector database
+faiss-cpu==1.7.4
+
+# Document processing
+pypdf==4.0.1
+python-docx==1.1.0
+markdown==3.5.2
+beautifulsoup4==4.12.3
+lxml==5.1.0
+
+# Database
+sqlalchemy==2.0.25
+aiosqlite==0.19.0
+
+# Utilities
+numpy==1.26.3
+requests==2.31.0
+aiofiles==23.2.1
+python-dotenv==1.0.0
+
+# Logging
+loguru==0.7.2

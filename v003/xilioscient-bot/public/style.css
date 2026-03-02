@@ -1,0 +1,244 @@
+/**
+ * XilioScient Bot - Stili (Tema Stile Elementor / SaaS)
+ * Design minimalista, flat colors, soft shadows
+ */
+
+/* === Reset e base === */
+.xsbot-floating-container * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.xsbot-floating-container {
+    position: fixed;
+    z-index: 99999;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.xsbot-floating-container[data-position="bottom-right"] { bottom: 24px; right: 24px; }
+.xsbot-floating-container[data-position="bottom-left"] { bottom: 24px; left: 24px; }
+
+/* === Toggle button === */
+.xsbot-toggle-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #5d46e2; /* Colore primario Elementor-style */
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(93, 70, 226, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.xsbot-toggle-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(93, 70, 226, 0.5);
+}
+
+.xsbot-toggle-btn:active { transform: translateY(0) scale(0.95); }
+
+.xsbot-toggle-btn svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.xsbot-icon-chat { opacity: 1; }
+.xsbot-icon-close { opacity: 0; transform: translate(-50%, -50%) rotate(90deg); }
+
+.xsbot-toggle-btn.xsbot-active .xsbot-icon-chat { opacity: 0; transform: translate(-50%, -50%) rotate(-90deg); }
+.xsbot-toggle-btn.xsbot-active .xsbot-icon-close { opacity: 1; transform: translate(-50%, -50%) rotate(0deg); }
+
+/* === Widget principale === */
+.xsbot-widget {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 380px;
+    height: 650px;
+    max-height: calc(100vh - 120px);
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15); /* Ombra morbida SaaS */
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden; /* Fondamentale per il border-radius */
+}
+
+.xsbot-widget.xsbot-open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+}
+
+/* === Header & Banner di Presentazione === */
+.xsbot-header-container {
+    background: #5d46e2;
+    color: white;
+    padding: 24px 20px;
+}
+
+.xsbot-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.xsbot-header-content { display: flex; align-items: center; gap: 12px; }
+
+.xsbot-avatar {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.xsbot-header-text h3 { font-size: 16px; font-weight: 600; margin: 0; letter-spacing: -0.3px; }
+.xsbot-status { font-size: 12px; opacity: 0.9; display: flex; align-items: center; gap: 6px; }
+.xsbot-status::before { content: ''; width: 8px; height: 8px; background: #4ade80; border-radius: 50%; display: inline-block; }
+
+.xsbot-header-actions { display: flex; gap: 8px; }
+.xsbot-action-btn {
+    width: 32px; height: 32px; background: transparent; border: none; border-radius: 8px;
+    color: white; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s; opacity: 0.8;
+}
+.xsbot-action-btn:hover { background: rgba(255, 255, 255, 0.15); opacity: 1; }
+
+/* Testo di presentazione nel banner */
+.xsbot-banner-intro h2 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+.xsbot-banner-intro p { font-size: 14px; opacity: 0.9; line-height: 1.4; }
+
+/* === Messages area === */
+.xsbot-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 20px;
+    background: #ffffff; /* Sfondo bianco puro */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* === Message bubble === */
+.xsbot-message { display: flex; animation: slideIn 0.3s ease; }
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.xsbot-message-content {
+    max-width: 85%;
+    padding: 14px 18px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Bolla Utente */
+.xsbot-message-user { justify-content: flex-end; }
+.xsbot-message-user .xsbot-message-content {
+    background: #5d46e2;
+    color: white;
+    border-radius: 18px 18px 4px 18px; /* Punta in basso a destra */
+}
+
+/* Bolla Bot */
+.xsbot-message-bot .xsbot-message-content {
+    background: #f1f5f9; /* Grigio chiarissimo */
+    color: #334155;
+    border-radius: 18px 18px 18px 4px; /* Punta in basso a sinistra */
+}
+
+.xsbot-message-time { font-size: 11px; opacity: 0.5; margin-top: 6px; text-align: right; }
+
+/* === Quick Replies (Domande Preimpostate) === */
+.xsbot-quick-replies {
+    padding: 0 20px 16px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    background: #ffffff;
+}
+
+.xsbot-quick-reply-btn {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: #5d46e2;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    text-align: left;
+}
+
+.xsbot-quick-reply-btn:hover {
+    background: #f8fafc;
+    border-color: #5d46e2;
+}
+
+/* === Input area === */
+.xsbot-input-area {
+    padding: 16px 20px;
+    background: #ffffff;
+    border-top: 1px solid #f1f5f9;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.xsbot-input {
+    flex: 1;
+    background: #f8fafc;
+    border: 1px solid transparent;
+    border-radius: 24px; /* Input pill-shaped */
+    padding: 12px 20px;
+    font-size: 14px;
+    font-family: inherit;
+    resize: none;
+    max-height: 100px;
+    transition: all 0.2s;
+    color: #334155;
+}
+
+.xsbot-input:focus { outline: none; background: #ffffff; border-color: #cbd5e1; box-shadow: 0 0 0 4px rgba(93, 70, 226, 0.05); }
+
+.xsbot-send-btn {
+    width: 44px; height: 44px;
+    background: #5d46e2;
+    border: none; border-radius: 50%;
+    color: white; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s; flex-shrink: 0;
+}
+.xsbot-send-btn:hover { transform: scale(1.05); }
+
+/* === Typing indicator === */
+.xsbot-typing-indicator { display: flex; gap: 4px; padding: 4px 0; }
+.xsbot-typing-indicator span {
+    width: 6px; height: 6px; background: #94a3b8; border-radius: 50%;
+    animation: typing 1.4s infinite;
+}
+.xsbot-typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.xsbot-typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-6px); }
+}
