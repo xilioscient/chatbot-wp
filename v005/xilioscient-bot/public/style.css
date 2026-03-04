@@ -1,0 +1,382 @@
+/**
+ * XilioScient Bot - Stili (Tema Stile Elementor / SaaS)
+ * Design minimalista, flat colors, soft shadows
+ * VERSIONE CORRETTA E FORZATA
+ */
+
+
+ .xsbot-message-bot .xsbot-message-content {
+    background: #ffffff !important; /* Bianco puro */
+    color: #334155 !important;
+    border: 1px solid #f1f5f9 !important; /* Bordo leggero per distinguere */
+    border-radius: 18px 18px 18px 4px !important;
+}
+
+/* Avatar dinamico */
+.xsbot-avatar img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+}
+
+/* Header con immagine dinamica */
+.xsbot-header-container {
+    background-color: #5d46e2 !important;
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+/* === RESET DI SICUREZZA === */
+/* Assicura che il box-model sia corretto indipendentemente dal tema */
+.xsbot-floating-container, 
+.xsbot-floating-container * {
+    box-sizing: border-box !important;
+    outline: none !important;
+}
+
+/* === CONTAINER PRINCIPALE === */
+/* Unito e corretto per garantire che stia sopra a tutto */
+body .xsbot-floating-container,
+.xsbot-floating-container {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: fixed !important;
+    z-index: 2147483647 !important; /* Valore massimo di sicurezza */
+    bottom: 20px !important;
+    right: 20px !important;
+    width: auto !important;
+    height: auto !important;
+    pointer-events: auto !important;
+    background: transparent !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    line-height: normal !important; /* Previene interlinea ereditaria strana */
+}
+
+/* Posizionamenti dinamici */
+.xsbot-floating-container[data-position="bottom-right"] { bottom: 24px !important; right: 24px !important; }
+.xsbot-floating-container[data-position="bottom-left"] { bottom: 24px !important; left: 24px !important; }
+
+/* === TOGGLE BUTTON (Il bottone tondo) === */
+.xsbot-toggle-btn {
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 50% !important;
+    background: #5d46e2 !important;
+    border: none !important;
+    cursor: pointer !important;
+    box-shadow: 0 8px 24px rgba(93, 70, 226, 0.4) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+}
+
+.xsbot-toggle-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 28px rgba(93, 70, 226, 0.5) !important;
+}
+
+.xsbot-toggle-btn:active { 
+    transform: translateY(0) scale(0.95) !important; 
+}
+
+/* Icone nel bottone */
+.xsbot-toggle-btn svg {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    color: white !important;
+    transition: all 0.3s ease !important;
+    width: 28px !important; /* Dimensione fissa per evitare deformazioni */
+    height: 28px !important;
+    margin: 0 !important;
+}
+
+.xsbot-icon-chat { opacity: 1 !important; }
+.xsbot-icon-close { opacity: 0 !important; transform: translate(-50%, -50%) rotate(90deg) !important; }
+
+/* Stato Attivo del bottone */
+.xsbot-toggle-btn.xsbot-active .xsbot-icon-chat { opacity: 0 !important; transform: translate(-50%, -50%) rotate(-90deg) !important; }
+.xsbot-toggle-btn.xsbot-active .xsbot-icon-close { opacity: 1 !important; transform: translate(-50%, -50%) rotate(0deg) !important; }
+
+/* === WIDGET PRINCIPALE (La finestra di chat) === */
+.xsbot-widget {
+    position: absolute !important;
+    bottom: 80px !important;
+    right: 0 !important;
+    width: 380px !important;
+    height: 650px !important;
+    max-height: calc(100vh - 120px) !important;
+    background: #ffffff !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    /* Stato Chiuso di default */
+    opacity: 0 !important;
+    visibility: hidden !important; 
+    transform: translateY(20px) scale(0.95) !important;
+    pointer-events: none !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    overflow: hidden !important;
+    z-index: 2147483647 !important;
+    margin: 0 !important;
+}
+
+/* Stato Aperto (Classe aggiunta via JS) */
+.xsbot-widget.xsbot-open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) scale(1) !important;
+    pointer-events: all !important;
+}
+
+/* === HEADER & BANNER === */
+.xsbot-header-container {
+    background: #5d46e2 !important;
+    color: white !important;
+    padding: 24px 20px !important;
+    flex-shrink: 0 !important; /* Impedisce che si rimpicciolisca */
+}
+
+.xsbot-header-top {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 16px !important;
+}
+
+.xsbot-header-content { display: flex !important; align-items: center !important; gap: 12px !important; }
+/*
+.xsbot-avatar {
+    width: 36px !important;
+    height: 36px !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+*/
+.xsbot-header-text h3 { 
+    font-size: 16px !important; 
+    font-weight: 600 !important; 
+    margin: 0 !important; 
+    letter-spacing: -0.3px !important; 
+    color: white !important;
+    line-height: 1.2 !important;
+}
+
+.xsbot-status { 
+    font-size: 12px !important; 
+    opacity: 0.9 !important; 
+    display: flex !important; 
+    align-items: center !important; 
+    gap: 6px !important; 
+    color: rgba(255,255,255,0.9) !important;
+    margin-top: 2px !important;
+}
+.xsbot-status::before { 
+    content: '' !important; 
+    width: 8px !important; 
+    height: 8px !important; 
+    background: #4ade80 !important; 
+    border-radius: 50% !important; 
+    display: inline-block !important; 
+}
+
+.xsbot-header-actions { display: flex !important; gap: 8px !important; }
+
+.xsbot-action-btn {
+    width: 32px !important; 
+    height: 32px !important; 
+    background: transparent !important; 
+    border: none !important; 
+    border-radius: 8px !important;
+    color: white !important; 
+    cursor: pointer !important; 
+    display: flex !important; 
+    align-items: center !important; 
+    justify-content: center !important;
+    transition: background 0.2s !important; 
+    opacity: 0.8 !important;
+    padding: 0 !important;
+}
+.xsbot-action-btn:hover { background: rgba(255, 255, 255, 0.15) !important; opacity: 1 !important; }
+
+/* Testo banner */
+.xsbot-banner-intro h2 { 
+    font-size: 20px !important; 
+    font-weight: 700 !important; 
+    margin: 0 0 6px 0 !important; 
+    color: white !important;
+}
+.xsbot-banner-intro p { 
+    font-size: 14px !important; 
+    opacity: 0.9 !important; 
+    line-height: 1.4 !important; 
+    margin: 0 !important;
+    color: white !important;
+}
+
+/* === AREA MESSAGGI === */
+.xsbot-messages {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    padding: 24px 20px !important;
+    background: #ffffff !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    height: 100% !important;
+}
+
+/* Bolle Messaggi */
+.xsbot-message { 
+    display: flex !important; 
+    width: 100% !important;
+    animation: slideIn 0.3s ease !important; 
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.xsbot-message-content {
+    max-width: 85% !important;
+    padding: 14px 18px !important;
+    position: relative !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    word-wrap: break-word !important;
+}
+
+/* Utente */
+.xsbot-message-user { justify-content: flex-end !important; }
+.xsbot-message-user .xsbot-message-content {
+    background: #5d46e2 !important;
+    color: white !important;
+    border-radius: 18px 18px 4px 18px !important;
+}
+
+/* Bot 
+.xsbot-message-bot { justify-content: flex-start !important; }
+.xsbot-message-bot .xsbot-message-content {
+    background: #f1f5f9 !important;
+    color: #334155 !important;
+    border-radius: 18px 18px 18px 4px !important;
+}
+*/
+.xsbot-message-time { 
+    display: block !important;
+    font-size: 11px !important; 
+    opacity: 0.5 !important; 
+    margin-top: 6px !important; 
+    text-align: right !important; 
+}
+
+/* === QUICK REPLIES === */
+.xsbot-quick-replies {
+    padding: 0 20px 16px 20px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    background: #ffffff !important;
+    flex-shrink: 0 !important;
+}
+
+.xsbot-quick-reply-btn {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #5d46e2 !important;
+    padding: 8px 14px !important;
+    border-radius: 20px !important;
+    font-size: 13px !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+    font-family: inherit !important;
+    text-align: left !important;
+    margin: 0 !important;
+}
+
+.xsbot-quick-reply-btn:hover {
+    background: #f8fafc !important;
+    border-color: #5d46e2 !important;
+}
+
+/* === INPUT AREA === */
+.xsbot-input-area {
+    padding: 16px 20px !important;
+    background: #ffffff !important;
+    border-top: 1px solid #f1f5f9 !important;
+    display: flex !important;
+    gap: 12px !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+}
+
+.xsbot-input {
+    flex: 1 !important;
+    background: #f8fafc !important;
+    border: 1px solid transparent !important;
+    border-radius: 24px !important;
+    padding: 12px 20px !important;
+    font-size: 14px !important;
+    font-family: inherit !important;
+    resize: none !important;
+    max-height: 100px !important;
+    transition: all 0.2s !important;
+    color: #334155 !important;
+    min-height: 45px !important;
+    line-height: 1.5 !important;
+}
+
+.xsbot-input:focus { 
+    outline: none !important; 
+    background: #ffffff !important; 
+    border-color: #cbd5e1 !important; 
+    box-shadow: 0 0 0 4px rgba(93, 70, 226, 0.05) !important; 
+}
+
+.xsbot-send-btn {
+    width: 44px !important; 
+    height: 44px !important;
+    background: #5d46e2 !important;
+    border: none !important; 
+    border-radius: 50% !important;
+    color: white !important; 
+    cursor: pointer !important; 
+    display: flex !important; 
+    align-items: center !important; 
+    justify-content: center !important;
+    transition: transform 0.2s !important; 
+    flex-shrink: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.xsbot-send-btn:hover { transform: scale(1.05) !important; }
+
+/* === TYPING INDICATOR === */
+.xsbot-typing-indicator { display: flex !important; gap: 4px !important; padding: 4px 0 !important; }
+.xsbot-typing-indicator span {
+    width: 6px !important; 
+    height: 6px !important; 
+    background: #94a3b8 !important; 
+    border-radius: 50% !important;
+    animation: typing 1.4s infinite !important;
+    display: inline-block !important;
+}
+.xsbot-typing-indicator span:nth-child(2) { animation-delay: 0.2s !important; }
+.xsbot-typing-indicator span:nth-child(3) { animation-delay: 0.4s !important; }
+
+@keyframes typing {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-6px); }
+}
+

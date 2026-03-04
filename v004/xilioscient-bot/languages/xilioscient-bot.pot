@@ -1,0 +1,244 @@
+# XilioScient Bot - Translation Template
+# Copyright (C) 2024 XilioScient Team
+# This file is distributed under the MIT License.
+msgid ""
+msgstr ""
+"Project-Id-Version: XilioScient Bot 1.0.0\n"
+"Report-Msgid-Bugs-To: phildepyan@gmail.com\n"
+"POT-Creation-Date: 2024-01-15 12:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: xilioscient-bot.php
+msgid "Ciao! Come posso aiutarti oggi?"
+msgstr ""
+
+msgid "Scrivi un messaggio..."
+msgstr ""
+
+msgid "Sto pensando..."
+msgstr ""
+
+msgid "Si è verificato un errore. Riprova."
+msgstr ""
+
+msgid "Troppe richieste. Riprova tra qualche minuto."
+msgstr ""
+
+msgid "Errore di connessione. Verifica la tua connessione internet."
+msgstr ""
+
+msgid "Grazie per il tuo feedback!"
+msgstr ""
+
+msgid "Invia"
+msgstr ""
+
+msgid "Nuova chat"
+msgstr ""
+
+msgid "Chiudi"
+msgstr ""
+
+#: includes/rest-endpoints.php
+msgid "Il messaggio non può essere vuoto"
+msgstr ""
+
+msgid "Il messaggio è troppo lungo"
+msgstr ""
+
+msgid "Nessun file fornito"
+msgstr ""
+
+msgid "Tipo di file non supportato"
+msgstr ""
+
+msgid "Documento eliminato"
+msgstr ""
+
+#: includes/admin-settings.php
+msgid "XilioScient Bot"
+msgstr ""
+
+msgid "Impostazioni"
+msgstr ""
+
+msgid "Knowledge Base"
+msgstr ""
+
+msgid "Conversazioni"
+msgstr ""
+
+msgid "Statistiche"
+msgstr ""
+
+msgid "Impostazioni salvate"
+msgstr ""
+
+msgid "Configurazione Servizio LLM"
+msgstr ""
+
+msgid "Endpoint LLM"
+msgstr ""
+
+msgid "URL del servizio LLM locale (es. http://127.0.0.1:5000)"
+msgstr ""
+
+msgid "JWT Secret"
+msgstr ""
+
+msgid "Chiave segreta per autenticazione JWT (minimo 32 caratteri)"
+msgstr ""
+
+msgid "Mostra/Nascondi"
+msgstr ""
+
+msgid "Test Connessione"
+msgstr ""
+
+msgid "Testa Connessione LLM"
+msgstr ""
+
+msgid "Configurazione RAG"
+msgstr ""
+
+msgid "Top K Retrieval"
+msgstr ""
+
+msgid "Numero di documenti rilevanti da recuperare"
+msgstr ""
+
+msgid "Dimensione Chunk"
+msgstr ""
+
+msgid "Dimensione chunks in caratteri"
+msgstr ""
+
+msgid "Overlap Chunk"
+msgstr ""
+
+msgid "Overlap tra chunks consecutivi"
+msgstr ""
+
+msgid "Max Context Tokens"
+msgstr ""
+
+msgid "Massimo numero di token per contesto"
+msgstr ""
+
+msgid "Fallback API Cloud"
+msgstr ""
+
+msgid "Provider"
+msgstr ""
+
+msgid "Nessuno"
+msgstr ""
+
+msgid "API cloud da usare se LLM locale non disponibile"
+msgstr ""
+
+msgid "API Key"
+msgstr ""
+
+msgid "Chiave API per servizio fallback"
+msgstr ""
+
+msgid "Personalizzazione Widget"
+msgstr ""
+
+msgid "Posizione Widget"
+msgstr ""
+
+msgid "Basso Destra"
+msgstr ""
+
+msgid "Basso Sinistra"
+msgstr ""
+
+msgid "Alto Destra"
+msgstr ""
+
+msgid "Alto Sinistra"
+msgstr ""
+
+msgid "Tema Widget"
+msgstr ""
+
+msgid "Chiaro"
+msgstr ""
+
+msgid "Scuro"
+msgstr ""
+
+msgid "Messaggio Benvenuto"
+msgstr ""
+
+msgid "Testo Placeholder"
+msgstr ""
+
+msgid "Privacy e Logging"
+msgstr ""
+
+msgid "Log Conversazioni"
+msgstr ""
+
+msgid "Salva conversazioni nel database"
+msgstr ""
+
+msgid "Anonimizza IP"
+msgstr ""
+
+msgid "Anonimizza indirizzi IP (GDPR)"
+msgstr ""
+
+msgid "Giorni Retention"
+msgstr ""
+
+msgid "Giorni prima di eliminare conversazioni vecchie"
+msgstr ""
+
+msgid "Rate Limiting"
+msgstr ""
+
+msgid "Max Richieste"
+msgstr ""
+
+msgid "Numero massimo di richieste"
+msgstr ""
+
+msgid "Finestra Temporale (secondi)"
+msgstr ""
+
+msgid "Periodo per il rate limiting (default: 3600 = 1 ora)"
+msgstr ""
+
+msgid "Funzionalità"
+msgstr ""
+
+msgid "Feedback Utenti"
+msgstr ""
+
+msgid "Abilita pulsanti thumbs up/down"
+msgstr ""
+
+msgid "Caricamento File"
+msgstr ""
+
+msgid "Permetti caricamento file nella chat"
+msgstr ""
+
+msgid "Salva Impostazioni"
+msgstr ""
+
+#: includes/shortcodes.php
+msgid "Hai bisogno di aiuto?"
+msgstr ""
+
+msgid "Chat Assistente"
+msgstr ""
