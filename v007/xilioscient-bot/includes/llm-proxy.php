@@ -219,71 +219,51 @@ public static function send_message($message, $session_id, $metadata = array()) 
      * Invia a Google Gemini
      */
     private static function send_to_gemini($message, $api_key) {
+        $kb = get_option('xsbot_knowledge_base', []);
+        $parts = [];
+        $needs_update = false;
 
-    $url = 'https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=' . $api_key;
+        // 1. Controllo scadenze e preparazione allegati
+        foreach ($kb as $key => $doc) {
+            // Se il file su Google è scaduto, lo ricarichiamo al volo
+            if (time() >= $doc['expires']) {
+                $new_google = XSBot_Knowledge_Handler::upload_to_google($doc['local_path'], $doc['mime'], $api_key);
+                if ($new_google) {
+                    $kb[$key]['uri'] = $new_google['uri'];
+                    $kb[$key]['expires'] = time() + (47 * 3600);
+                    $doc = $kb[$key]; // Aggiorna riferimento locale
+                    $needs_update = true;
+                }
+            }
+            
+            $parts[] = [
+                'file_data' => [
+                    'mime_type' => $doc['mime'],
+                    'file_uri'  => $doc['uri']
+                ]
+            ];
+        }
 
-        // Struttura dei contenuti
-        $payload = array(
-            'contents' => array(
-                array(
-                    'role' => 'user',
-                    'parts' => array(
-                        array('text' => "Sei un assistente AI utile. Rispondi in italiano.\n\nDomanda: " . $message)
-                    )
-                )
-            ),
-            'generationConfig' => array(
-                'maxOutputTokens' => 800,
-                'temperature' => 0.7,
-            ),
-        );
+        if ($needs_update) update_option('xsbot_knowledge_base', $kb);
 
-        // Usa wp_json_encode per evitare errori di codifica
-        $json_payload = wp_json_encode($payload);
+        // 2. Aggiunta testo utente
+        $parts[] = ['text' => "Sei un assistente AI. Usa i documenti forniti per rispondere. Rispondi in italiano.\n\nUtente: " . $message];
+
+        // 3. Chiamata API
+        $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" . $api_key;
         
-        if (false === $json_payload) {
-            error_log('Gemini Bot: Errore nella codifica JSON.');
-            return array('response' => 'Errore interno (JSON).', 'error' => true);
-        }
+        $response = wp_remote_post($url, [
+            'headers' => ['Content-Type' => 'application/json'],
+            'body'    => wp_json_encode(['contents' => [['role' => 'user', 'parts' => $parts]]]),
+            'timeout' => 60
+        ]);
 
-        $response = wp_remote_post($url, array(
-            'timeout' => 30,
-            'headers' => array('Content-Type' => 'application/json'),
-            'body'    => $json_payload,
-        ));
+        if (is_wp_error($response)) return ['response' => 'Errore server.', 'error' => true];
 
-        // Controllo WP_Error
-        if (is_wp_error($response)) {
-            error_log('Gemini Bot: WP_Remote_Post Error: ' . $response->get_error_message());
-            return array('response' => 'Errore di connessione al server.', 'error' => true);
-        }
+        $data = json_decode(wp_remote_retrieve_body($response), true);
+        $text = $data['candidates'][0]['content']['parts'][0]['text'] ?? 'Nessuna risposta.';
 
-        $response_body = wp_remote_retrieve_body($response);
-        $data = json_decode($response_body, true);
-
-        // Controllo se il JSON di ritorno è valido
-        if (null === $data) {
-            error_log('Gemini Bot: Impossibile decodificare la risposta API. Raw body: ' . $response_body);
-            return array('response' => 'Risposta API non valida.', 'error' => true);
-        }
-
-        // Verifica errori restituiti da Google (es. API Key scaduta/errata)
-        if (isset($data['error'])) {
-            error_log('Gemini Bot API Error: ' . $data['error']['message']);
-            return array('response' => 'Errore API: ' . $data['error']['message'], 'error' => true);
-        }
-
-        // Estrazione testo
-        if (isset($data['candidates'][0]['content']['parts'][0]['text'])) {
-            return array(
-                'response' => $data['candidates'][0]['content']['parts'][0]['text'],
-                'sources'  => array(),
-                'fallback' => false,
-                'provider' => 'gemini'
-            );
-        }
-
-        return array('response' => 'Risposta non trovata.', 'error' => true);
+        return ['response' => $text, 'provider' => 'gemini'];
     }
 
     /**
