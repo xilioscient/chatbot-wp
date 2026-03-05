@@ -23,6 +23,9 @@
         ]
     };
 
+    const bannerImg = typeof window.bannerImg !== 'undefined' ? window.bannerImg : '';
+    const profileImg = typeof window.profileImg !== 'undefined' ? window.profileImg : '';
+
     class XSBot {
         constructor() {
             this.sessionId = this.getSessionId();
@@ -45,41 +48,45 @@
             }
         }
 
-        createFloatingWidget() {
-            const html = `
-                <div class="xsbot-floating-container xsbot-theme-${botConfig.theme}" data-position="${botConfig.position}">
-                    <button class="xsbot-toggle-btn" id="xsbot-toggle" aria-label="${botConfig.strings.newChat}">
-                        <svg class="xsbot-icon-chat" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                        <svg class="xsbot-icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    </button>
-                    <div class="xsbot-widget" id="xsbot-widget">
-                        <div class="xsbot-header-container" style="${bannerImg}">
-                            <div class="xsbot-header-top">
-                                <div class="xsbot-header-content">
-                                    <div class="xsbot-avatar">${profileImg}</div>
-                                    <div class="xsbot-header-text"><h3>Team di Supporto</h3><span class="xsbot-status">Risponde subito</span></div>
+                createFloatingWidget() {
+               
+                const bannerUrl = '/../xilioscient-bot/xsbot-assets/banner.jpg';
+                const profileUrl = '/../xsbot-assets/propic.png';
+
+                const html = `
+                    <div class="xsbot-floating-container xsbot-theme-${botConfig.theme}" data-position="${botConfig.position}">
+                        <button class="xsbot-toggle-btn" id="xsbot-toggle" aria-label="${botConfig.strings.newChat}">
+                            <svg class="xsbot-icon-chat" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            <svg class="xsbot-icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        </button>
+                        <div class="xsbot-widget" id="xsbot-widget">
+                            <div class="xsbot-header-container" style="background-image: url('${bannerUrl}'); background-size: cover; background-position: center;">
+                                <div class="xsbot-header-top">
+                                    <div class="xsbot-header-content">
+                                        <div class="xsbot-avatar"><img src="${profileUrl}" alt="Supporto" style="width:36px; height:36px; border-radius:50%; object-fit:cover;"></div>
+                                        <div class="xsbot-header-text"><h3>Team di Supporto</h3><span class="xsbot-status">Risponde subito</span></div>
+                                    </div>
+                                    <div class="xsbot-header-actions">
+                                        <button class="xsbot-action-btn" id="xsbot-new-chat" title="${botConfig.strings.newChat}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                                        <button class="xsbot-action-btn" id="xsbot-close" title="${botConfig.strings.close}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                                    </div>
                                 </div>
-                                <div class="xsbot-header-actions">
-                                    <button class="xsbot-action-btn" id="xsbot-new-chat" title="${botConfig.strings.newChat}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
-                                    <button class="xsbot-action-btn" id="xsbot-close" title="${botConfig.strings.close}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
-                                </div>
+                                <div class="xsbot-banner-intro"><h2>Ciao, sono Xilio 👋</h2><p>Troviamo insieme la soluzione migliore.</p></div>
                             </div>
-                            <div class="xsbot-banner-intro"><h2>Ciao, sono Xilio 👋</h2><p>Troviamo insieme la soluzione migliore.</p></div>
-                        </div>
-                        <div class="xsbot-messages" id="xsbot-messages"></div>
-                        <div class="xsbot-quick-replies" id="xsbot-quick-replies"></div>
-                        <div class="xsbot-input-area">
-                            <textarea class="xsbot-input" id="xsbot-input" placeholder="${botConfig.placeholderText}" rows="1"></textarea>
-                            <button class="xsbot-send-btn" id="xsbot-send" aria-label="${botConfig.strings.send}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
-                        </div>
-                             <div class="xsbot-footer">
-                                Made by <a href="https://gonet.it" target="_blank">goNet.it</a>
+                            <div class="xsbot-messages" id="xsbot-messages"></div>
+                            <div class="xsbot-quick-replies" id="xsbot-quick-replies"></div>
+                            <div class="xsbot-input-area">
+                                <textarea class="xsbot-input" id="xsbot-input" placeholder="${botConfig.placeholderText}" rows="1"></textarea>
+                                <button class="xsbot-send-btn" id="xsbot-send" aria-label="${botConfig.strings.send}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
                             </div>
+                            <div class="xsbot-footer" style="text-align: center; font-size: 10px; margin-top: 5px; padding-bottom: 5px;">
+                                Made by <a href="https://gonet.it" target="_blank" style="color: purple; text-decoration: none;">goNet.it</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            `;
-            $('body').append(html);
-        }
+                `;
+                $('body').append(html);
+            }
 
         renderQuickReplies() {
             const $container = $('#xsbot-quick-replies');

@@ -1,0 +1,277 @@
+/**
+ * XilioScient Bot - FULL COMPLETE VERSION 
+ * Colori: Grigio, Giallo e Arancio Pastello
+ * Fix: Bolle messaggi, Toggle visibile, Banner Testo Bianco, Textarea Fissa
+ */
+
+/* === RESET DI SICUREZZA === */
+.xsbot-floating-container, 
+.xsbot-floating-container * {
+    box-sizing: border-box !important;
+    outline: none !important;
+    font-family: 'Inter', -apple-system, sans-serif !important;
+}
+
+/* === CONTAINER PRINCIPALE === */
+body .xsbot-floating-container,
+.xsbot-floating-container {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: fixed !important;
+    z-index: 2147483647 !important;
+    bottom: 24px !important;
+    right: 24px !important;
+    width: auto !important;
+    height: auto !important;
+    pointer-events: auto !important;
+}
+
+/* Posizionamenti dinamici */
+.xsbot-floating-container[data-position="bottom-right"] { bottom: 24px !important; right: 24px !important; }
+.xsbot-floating-container[data-position="bottom-left"] { bottom: 24px !important; left: 24px !important; }
+
+/* === TOGGLE BUTTON (Il bottone tondo) === */
+.xsbot-toggle-btn {
+    width: 65px !important;
+    height: 65px !important;
+    border-radius: 50% !important;
+    background: #fb923c !important; /* Arancio Pastello */
+    border: none !important;
+    cursor: pointer !important;
+    box-shadow: 0 8px 24px rgba(251, 146, 60, 0.4) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 2147483647 !important;
+}
+
+.xsbot-toggle-btn:hover {
+    transform: translateY(-3px) scale(1.05) !important;
+}
+
+.xsbot-toggle-btn svg {
+    position: absolute !important;
+    color: white !important;
+    transition: all 0.3s ease !important;
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.xsbot-icon-chat { opacity: 1 !important; }
+.xsbot-icon-close { opacity: 0 !important; transform: rotate(90deg) !important; }
+
+.xsbot-toggle-btn.xsbot-active .xsbot-icon-chat { opacity: 0 !important; transform: rotate(-90deg) !important; }
+.xsbot-toggle-btn.xsbot-active .xsbot-icon-close { opacity: 1 !important; transform: rotate(0deg) !important; }
+
+/* === WIDGET PRINCIPALE === */
+.xsbot-widget {
+    position: absolute !important;
+    bottom: 85px !important;
+    right: 0 !important;
+    width: 380px !important;
+    height: 650px !important;
+    max-height: calc(100vh - 130px) !important;
+    background: #ffffff !important;
+    border-radius: 20px !important;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    opacity: 0 !important;
+    visibility: hidden !important; 
+    transform: translateY(20px) scale(0.95) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    overflow: hidden !important;
+    border: 1px solid #f1f5f9 !important;
+}
+
+.xsbot-widget.xsbot-open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) scale(1) !important;
+    pointer-events: all !important;
+}
+
+/* === HEADER & BANNER === */
+.xsbot-header-container {
+    background-size: cover !important;
+    background-position: center !important;
+    padding: 24px 20px !important;
+    position: relative !important;
+}
+
+.xsbot-header-top {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 15px !important;
+}
+
+.xsbot-header-content { display: flex !important; align-items: center !important; gap: 12px !important; }
+
+/* Propic Resize Fix */
+.xsbot-avatar {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 50% !important;
+    border: 2px solid rgba(255, 255, 255, 0.6) !important;
+    overflow: hidden !important;
+    background: #f1f5f9 !important;
+}
+
+.xsbot-avatar img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+.xsbot-header-text h3 { 
+    font-size: 16px !important; 
+    font-weight: 700 !important; 
+    margin: 0 !important; 
+    color: white !important;
+}
+
+.xsbot-status { 
+    font-size: 12px !important; 
+    color: rgba(255,255,255,0.95) !important;
+}
+
+/* Bottoni Header Professionali */
+.xsbot-header-actions { display: flex !important; gap: 10px !important; }
+.xsbot-action-btn {
+    width: 34px !important;
+    height: 34px !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 10px !important;
+    color: white !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s !important;
+}
+
+.xsbot-action-btn:hover { background: #ffffff !important; color: #fb923c !important; }
+
+.xsbot-banner-intro h2 { font-size: 22px !important; color: white !important; margin: 0 0 5px 0 !important; }
+.xsbot-banner-intro p { font-size: 14px !important; color: white !important; opacity: 1 !important; margin: 0 !important; }
+
+/* === AREA MESSAGGI (Fix Bolle) === */
+.xsbot-messages {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    padding: 24px 20px !important;
+    background: #f8fafc !important; /* Grigio tenue */
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+}
+
+.xsbot-message { display: flex !important; width: 100% !important; animation: slideIn 0.3s ease !important; }
+
+.xsbot-message-content {
+    max-width: 85% !important;
+    min-width: 60px !important;
+    width: fit-content !important;
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    word-wrap: break-word !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02) !important;
+}
+
+/* Bot (Bianco) */
+.xsbot-message-bot { justify-content: flex-start !important; }
+.xsbot-message-bot .xsbot-message-content {
+    background: #ffffff !important;
+    color: #334155 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 16px 16px 16px 4px !important;
+}
+
+/* User (Arancio Pastello) */
+.xsbot-message-user { justify-content: flex-end !important; }
+.xsbot-message-user .xsbot-message-content {
+    background: #fff7ed !important;
+    color: #9a3412 !important;
+    border: 1px solid #ffedd5 !important;
+    border-radius: 16px 16px 4px 16px !important;
+}
+
+/* === QUICK REPLIES (Giallo Pastello) === */
+.xsbot-quick-replies {
+    padding: 10px 20px 20px 20px !important;
+    background: #f8fafc !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+}
+
+.xsbot-quick-reply-btn {
+    background: #fffbeb !important;
+    border: 1px solid #fef08a !important;
+    color: #854d0e !important;
+    padding: 8px 14px !important;
+    border-radius: 20px !important;
+    font-size: 13px !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+}
+
+.xsbot-quick-reply-btn:hover { background: #fef9c3 !important; border-color: #fb923c !important; }
+
+/* === INPUT AREA (Textarea Fix) === */
+.xsbot-input-area {
+    padding: 16px 20px !important;
+    background: #ffffff !important;
+    border-top: 1px solid #f1f5f9 !important;
+    display: flex !important;
+    gap: 12px !important;
+    align-items: center !important;
+}
+
+.xsbot-input {
+    flex: 1 !important;
+    background: #f1f5f9 !important;
+    border: 1px solid transparent !important;
+    border-radius: 12px !important;
+    padding: 12px 15px !important;
+    font-size: 14px !important;
+    resize: none !important;
+    height: 48px !important;
+    max-height: 48px !important; /* BLINDATA */
+    color: #334155 !important;
+}
+
+.xsbot-send-btn {
+    width: 44px !important;
+    height: 44px !important;
+    background: #fb923c !important;
+    border-radius: 12px !important;
+    color: white !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: none !important;
+}
+
+/* === ANIMAZIONI E INDICATORI (RIPRISTINATI) === */
+@keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.xsbot-typing-indicator { display: flex !important; gap: 4px !important; padding: 4px 0 !important; }
+.xsbot-typing-indicator span {
+    width: 6px !important; height: 6px !important; background: #cbd5e1 !important; border-radius: 50% !important;
+    animation: typing 1.4s infinite !important; display: inline-block !important;
+}
+.xsbot-typing-indicator span:nth-child(2) { animation-delay: 0.2s !important; }
+.xsbot-typing-indicator span:nth-child(3) { animation-delay: 0.4s !important; }
+@keyframes typing { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
+
+.xsbot-footer { text-align: center; font-size: 10px; padding: 10px; background: white; color: #94a3b8; }
+.xsbot-footer a { color: #fb923c; text-decoration: none; font-weight: 600; }
