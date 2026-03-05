@@ -1,2 +1,5 @@
 v003/docker/data/models/model.gguf
 *.gguf
+*.jpg
+*.png
+*.model
